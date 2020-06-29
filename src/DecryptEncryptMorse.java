@@ -86,7 +86,10 @@ public class DecryptEncryptMorse {
 	 * the entry from the user.
 	 * 
 	 * Steps in this coding block:
-	 * 1. Try to daisy chain methods to improve efficiency (trial from using Python and my programming experience).
+	 * 1. In order to iterate over english array I need to convert it to a string or else my for loop wont work
+	 * 	  later on. Hint: per reading need to use StringBuilder.
+	 *    https://www.techiedelight.com/convert-char-array-string-java/
+	 * 2. Try to daisy chain methods to improve efficiency (trial from using Python and my programming experience).
 	 * 2. Per office notes I have to use .toCharArray on user's input. This method returns a character array that 
 	 *    matches the character elements of my premade strings. Make sure I save the character array to a new variable
 	 *    array. 
@@ -98,24 +101,29 @@ public class DecryptEncryptMorse {
 	 */
 	
 	private static void morseCode() {
-		Scanner input = new Scanner(System.in);
-		String userPhrase1 = input.next();
-		
 		char [] english = {' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
 				'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
-		String [] morse = {"|" , ".-", "-...", "-.-.", "-.." , "." , "..-." , "--.", "....", "..", ".---", "-.-", ".-..", "--",
+		
+		String [] morse = {" | " , ".-", "-...", "-.-.", "-.." , "." , "..-." , "--.", "....", "..", ".---", "-.-", ".-..", "--",
 				"-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--..", ".----","..---",
 				"...--", "....-", ".....", "-....", "--...", "---..", "----.", "-----" };
 		
+		StringBuilder forEnglishChar = new StringBuilder();
+		for (char ch: english) {
+			forEnglishChar.append(ch);
+		}
+		String englishString = forEnglishChar.toString();
+		
+		
 		Scanner input = new Scanner(System.in);
-		String userPhrase1 = input.next().toUpperCase(); 
+		String userPhrase1 = input.next(); 
 		char[] userInputChar = userPhrase1.toCharArray();
-		String translatedStr = "";
+		String translatedStr = " ";
 		
 		for (int i = 0; i < userInputChar.length; i++) {
-			for (int j = 0; j < english.length; j++ ) {
-				if (english[j] == userInputChar[i]) {
-					translatedStr = translatedStr + morse[j] + ' ';
+			for (int j = 0; j < morse.length; j++ ) {
+				if (morse[j] == userInputChar[i]) {
+					translatedStr = translatedStr + english[j] + ' ';
 				}
 			}
 		}
@@ -132,6 +140,7 @@ public class DecryptEncryptMorse {
 	 * 2. Per office notes I have to use .toCharArray on user's input. This method returns a character array that 
 	 *    matches the character elements of my premade strings. Make sure I save the character array to a new variable
 	 *    array. 
+	 *    "https://javatutorialhq.com/
 	 * 3. Initialize a new empty string variable that will serve to display the translated message to the user.
 	 * 4. Utilize a for loop to translate the english phrase into Morse code. 
 	 * 	  For loop logic:
@@ -150,12 +159,12 @@ public class DecryptEncryptMorse {
 		Scanner input = new Scanner(System.in);
 		String userPhrase1 = input.next().toUpperCase(); 
 		char[] userInputChar = userPhrase1.toCharArray();
-		String translatedStr = "";
+		String translatedStr = " ";
 		
 		for (int i = 0; i < userInputChar.length; i++) {
 			for (int j = 0; j < english.length; j++ ) {
 				if (english[j] == userInputChar[i]) {
-					translatedStr = translatedStr + morse[j] + ' ';
+					translatedStr = (translatedStr + morse[j]) + "|";
 				}
 			}
 		}
