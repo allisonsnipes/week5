@@ -84,12 +84,41 @@ public class DecryptEncryptMorse {
 	/*
 	 * This is the coding block that is responsible for translating Morse code sentence into English based on 
 	 * the entry from the user.
+	 * 
+	 * Steps in this coding block:
+	 * 1. Try to daisy chain methods to improve efficiency (trial from using Python and my programming experience).
+	 * 2. Per office notes I have to use .toCharArray on user's input. This method returns a character array that 
+	 *    matches the character elements of my premade strings. Make sure I save the character array to a new variable
+	 *    array. 
+	 * 3. Initialize a new empty string variable that will serve to display the translated message to the user.
+	 * 4. Utilize a for loop to translate the english phrase into Morse code. 
+	 * 	  For loop logic:
+	 * 	  Take the user's input string and the english alphabet string and iterate over both strings comparing each
+	 * 	  character, save each match to the translated string along with the morse code match. 
 	 */
 	
 	private static void morseCode() {
 		Scanner input = new Scanner(System.in);
 		String userPhrase1 = input.next();
 		
+		char [] english = {' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
+				'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
+		String [] morse = {"|" , ".-", "-...", "-.-.", "-.." , "." , "..-." , "--.", "....", "..", ".---", "-.-", ".-..", "--",
+				"-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--..", ".----","..---",
+				"...--", "....-", ".....", "-....", "--...", "---..", "----.", "-----" };
+		
+		Scanner input = new Scanner(System.in);
+		String userPhrase1 = input.next().toUpperCase(); 
+		char[] userInputChar = userPhrase1.toCharArray();
+		String translatedStr = "";
+		
+		for (int i = 0; i < userInputChar.length; i++) {
+			for (int j = 0; j < english.length; j++ ) {
+				if (english[j] == userInputChar[i]) {
+					translatedStr = translatedStr + morse[j] + ' ';
+				}
+			}
+		}
 		
 		System.out.println("\nHere is your code in English:\n");
 	}
@@ -97,17 +126,20 @@ public class DecryptEncryptMorse {
 	/*
 	 * This is the coding block that is responsible for translating the English sentence into Morse code based on 
 	 * the entry from the user.
+	 * 
 	 * Steps in this coding block:
 	 * 1. Try to daisy chain methods to improve efficiency (trial from using Python and my programming experience).
 	 * 2. Per office notes I have to use .toCharArray on user's input. This method returns a character array that 
 	 *    matches the character elements of my premade strings. Make sure I save the character array to a new variable
 	 *    array. 
 	 * 3. Initialize a new empty string variable that will serve to display the translated message to the user.
-	 * 4. Utilize a for loop to translate the english phrase into Morse code
+	 * 4. Utilize a for loop to translate the english phrase into Morse code. 
+	 * 	  For loop logic:
+	 * 	  Take the user's input string and the english alphabet string and iterate over both strings comparing each
+	 * 	  character, save each match to the translated string along with the morse code match. 
 	 */
 	
 	private static void englishCode() {
-		// encode & decode arrays
 		char [] english = {' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
 						'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
 		
@@ -128,7 +160,7 @@ public class DecryptEncryptMorse {
 			}
 		}
 		
-		System.out.println("\nHere is your code in Morse Code:\n");
+		System.out.println("\nHere is your code in Morse Code:\n" + translatedStr);
 	}
 
 }
