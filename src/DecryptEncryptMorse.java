@@ -28,36 +28,35 @@ public class DecryptEncryptMorse {
 	 */
 
 	public static void main(String[] args) {
-		
+
 		headerMessage();
 
 		Scanner input = new Scanner(System.in);
 		System.out.println("Make your selection: ");
 		int userChoice = input.nextInt();
-		
-		switch(userChoice) {
-		
-		case 0:
-			System.out.println("\nThank you for using the application!");
-			break;
-			
-		case 1:
-			System.out.println("Enter your Morse Code: ");
-			morseCode();
-			
-			break;
-			
-		case 2:
-			System.out.println("Enter your sentence: ");
-			englishCode();
-			
-			break;
-		
-		default:
-			System.out.println("An unknown error has occured, please try again.");
-			break;
+
+		switch (userChoice) {
+
+			case 0:
+				System.out.println("\nThank you for using the application!");
+				break;
+
+			case 1:
+				System.out.println("Enter your Morse Code: ");
+				morseCode();
+
+				break;
+
+			case 2:
+				System.out.println("Enter your sentence: ");
+				englishCode();
+
+				break;
+
+			default:
+				System.out.println("An unknown error has occured, please try again.");
+				break;
 		}
-		
 
 	}
 
@@ -80,75 +79,85 @@ public class DecryptEncryptMorse {
 		System.out.println("+------------------------------------------------------------------------+");
 		System.out.println("\n");
 	}
-	
+
 	/*
-	 * This is the coding block that is responsible for translating Morse code sentence into English based on 
-	 * the entry from the user.
+	 * This is the coding block that is responsible for translating Morse code
+	 * sentence into English based on the entry from the user.
 	 * 
-	 * Steps in this coding block:
-	 * 1. Initialize a new empty string variable that will serve to display the translated message to the user.
-	 * 4. Utilize a for loop to translate the Morse phrase into English sentence. 
-	 * 	  For loop logic:
-	 * 	  Take the user's input string and the Morse alphabet string and iterate over both strings comparing each
-	 * 	  character, save each match to the translated string along with the english code match. 
+	 * Steps in this coding block: 1. Initialize a new empty string variable that
+	 * will serve to display the translated message to the user. 4. Utilize a for
+	 * loop to translate the Morse phrase into English sentence. For loop logic:
+	 * Take the user's input string and the Morse alphabet string and iterate over
+	 * both strings comparing each character, save each match to the translated
+	 * string along with the english code match.
 	 */
-	
+
 	private static void morseCode() {
-		char [] english = {' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
-				'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
-		
-		String [] morse = {"|" , ".-", "-...", "-.-.", "-.." , "." , "..-." , "--.", "....", "..", ".---", "-.-", ".-..", "--",
-				"-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--..", ".----","..---",
+		char[] english = { ' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
+				'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
+
+		String[] morse = { "|", ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--",
+				"-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--..", ".----", "..---",
 				"...--", "....-", ".....", "-....", "--...", "---..", "----.", "-----" };
 
 		Scanner input = new Scanner(System.in);
-		String morsePhrase= input.next();
-		String translatedStr = " ";
-	
-		for (int i = 0; i < morsePhrase.length(); i++) {
-			for(int j = 0; i < morse.length; j++) {
-				if (morsePhrase.equals(morse[i])) {
-					translatedStr = (translatedStr + english[j]) + " ";
-				}		
-			}	
-		}	
-		System.out.println("\nHere is your code in English:\n" + translatedStr);
-	}
-	
-	/*
-	 * This is the coding block that is responsible for translating the English sentence into Morse code based on 
-	 * the entry from the user.
-	 * 
-	 * Steps in this coding block:
-	 * 1. Initialize a new empty string variable that will serve to display the translated message to the user.
-	 * 2. Utilize a for loop to translate the Morse code into English. 
-	 * 	  For loop logic:
-	 * 	  Take the user's input string and the English alphabet string and iterate over both strings comparing each
-	 * 	  character, save each match to the translated string along with the morse code match. 
-	 */
-	
-	private static void englishCode() {
-		char [] english = {' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
-						'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
-		
-		String [] morse = {"|" , ".-", "-...", "-.-.", "-.." , "." , "..-." , "--.", "....", "..", ".---", "-.-", ".-..", "--",
-						"-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--..", ".----","..---",
-						"...--", "....-", ".....", "-....", "--...", "---..", "----.", "-----" };
-
-		Scanner input = new Scanner(System.in);
-		String userPhrase1 = input.next().toUpperCase(); 
-		char[] userInputChar = userPhrase1.toCharArray();
+		String morsePhrase = input.next();
 		String translatedStr = " ";
 		
-		for (int i = 0; i < userInputChar.length; i++) {
-			for (int j = 0; j < english.length; j++ ) {
-				if (english[j] == userInputChar[i]) {
-					translatedStr = (translatedStr + morse[j]) + "|";
+		while(input.hasNext()) {
+			int k = 0;
+			for (int i = 0; i < morse.length; i++) {
+				if (morse[i].equals(morsePhrase)) {
+					k = i;
 				}
 			}
+		translatedStr = translatedStr + english[k] + " ";	
+		// System.out.println("working2"); I am stuck here recursive loop ask for help.
 		}
+	}
+
+	/*
+	 * This is the coding block that is responsible for translating the English
+	 * sentence into Morse code based on the entry from the user.
+	 * 
+	 * Steps in this coding block: 1. Initialize a new empty string variable that
+	 * will serve to display the translated message to the user. 2. Make sure I
+	 * control 2. Utilize a for loop to translate the Morse code into English. For
+	 * loop logic: Take the user's input string and the English alphabet string and
+	 * iterate over both strings comparing each character, save each match to the
+	 * translated string along with the morse code match.
+	 */
+
+	private static void englishCode() {
+		char[] english = { ' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
+				'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
+
+		String[] morse = { "|", ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--",
+				"-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--..", ".----", "..---",
+				"...--", "....-", ".....", "-....", "--...", "---..", "----.", "-----" };
+
+		Scanner input = new Scanner(System.in);
+		String userPhrase1 = input.next().toUpperCase();
+		char[] userInputChar = userPhrase1.toCharArray();
+		String translatedStr = " ";
+
+		/*
+		 * Also ask for help here. This is not meeting the program's exspectation of being
+		 * able to translate more than one word. Can only do one word, I have tried moving 
+		 * around the code and different logic.
+		 */
 		
+		for (int i = 0; i < userInputChar.length; i++) {
+			for (int j = 0; j < english.length; j++) {
+				if (english[j] == userInputChar[i]) {
+					translatedStr = translatedStr + morse[j] + "|";
+					
+				}
+			}
+			
+		}
 		System.out.println("\nHere is your code in Morse Code:\n" + translatedStr);
+		
 	}
 
 }
