@@ -10,8 +10,8 @@
  * letter translations must be kept and processed using either two one-dimensional or one two-dimensional 
  * arrays.
  * 
- * When you input Morse code, separate each letter/digit with a single space, and delimit multiple words with a “|”. 
- * For example, - --- | -... . would be the Morse code input for the sentence “to be”. Your program only needs to 
+ * When you input Morse code, separate each letter/digit with a single space, and delimit multiple words with a '|'. 
+ * For example, - --- | -... . would be the Morse code input for the sentence 'to be'. Your program only needs to 
  * handle a single sentence and can ignore punctuation symbols. When you input English, separate each word with 
  * a blank space.
 */
@@ -19,11 +19,17 @@
 import java.util.Scanner;
 
 public class DecryptEncryptMorse {
+	
+	static char[] english = { ' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
+			'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
+
+	static String[] morse = { "|", ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--",
+			"-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--..", ".----", "..---",
+			"...--", "....-", ".....", "-....", "--...", "---..", "----.", "-----" };
 
 	/*
 	 * Main class of the application. Here global variables are initialized and the
-	 * control flow of the program resides. The arrays of the Alphabet and the Morse
-	 * Code counterpart is initialized and/or declared. Basic error handling is also
+	 * control flow of the program resides. Basic error handling is also
 	 * used for user's input when gathered.
 	 */
 
@@ -32,7 +38,7 @@ public class DecryptEncryptMorse {
 		headerMessage();
 
 		Scanner input = new Scanner(System.in);
-		System.out.println("Make your selection: ");
+		System.out.println("\nMake your selection:");
 		int userChoice = input.nextInt();
 
 		switch (userChoice) {
@@ -42,13 +48,13 @@ public class DecryptEncryptMorse {
 				break;
 
 			case 1:
-				System.out.println("\nEnter your Morse Code: ");
+				System.out.println("\nEnter your Morse Code:");
 				morseCode();
 
 				break;
 
 			case 2:
-				System.out.println("\nEnter your sentence: ");
+				System.out.println("\nEnter your sentence:");
 				englishCode();
 
 				break;
@@ -87,8 +93,8 @@ public class DecryptEncryptMorse {
 	 * Difference between .next() and .nextLine():
 	 * https://www.geeksforgeeks.org/difference-between-next-and-nextline-methods-in-java/
 	 * 
-	 * 1. .nextLine(): can read input until the line change or new line
-	 * 2. .next(): can only read input until it encounters a space
+	 * 1. .nextLine(): can read input until there's a line change (or new line)
+	 * 2. .next(): can only read input until there's a space
 	 * 
 	 * Steps in this coding block: 
 	 * 
@@ -98,32 +104,24 @@ public class DecryptEncryptMorse {
 	 * 
 	 *    For loop logic:
 	 *    Take the user's input string and the Morse alphabet string and iterate over both strings 
-	 *    comparing each character, save each match to the translate string along with the english code match.
+	 *    comparing each character, save each match to the translate string along with the English code match.
 	 */
 
-	private static void morseCode() {
-		char[] english = { ' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
-				'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
-
-		String[] morse = { "|", ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--",
-				"-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--..", ".----", "..---",
-				"...--", "....-", ".....", "-....", "--...", "---..", "----.", "-----" };
-
+	public static void morseCode() {
+		
 		Scanner input = new Scanner(System.in);
 		String userPhrase1 = input.nextLine();
-		String translatedStr = " ";
-		
-		do {
-			for (int i = 0; i < userPhrase1.length(); i++) {
-				for (int j = 0; j < morse.length; j++ ) {	
-					if (morse[j].equals(userPhrase1)) {
-						translatedStr = english[i] + "|";
+		char[] userInputChar = userPhrase1.toCharArray();
+				
+		while (input.hasNextLine()) {
+			for (int i = 0; i < userInputChar.length; i++) {
+				for (int j = 0; j < morse.length; j++ ) {
+					if (morse.equals(userInputChar[i])) {
+						System.out.println("\nHere is your code in Morse Code:\n" + english[j]);	
 					} 
 				}
-				
-			}
-			System.out.println("\nHere is your code in Morse Code:\n" + translatedStr);
-		} while (input.nextLine() != null);
+			}break;	
+		}
 	}
 		
 
@@ -140,19 +138,12 @@ public class DecryptEncryptMorse {
 	 *    with the morse code match.
 	 */
 
-	private static void englishCode() {
-
-		char[] english = { ' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
-				'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
-
-		String[] morse = { "|", ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--",
-				"-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--..", ".----", "..---",
-				"...--", "....-", ".....", "-....", "--...", "---..", "----.", "-----" };		
+	public static void englishCode() {	
 		
 		Scanner input = new Scanner(System.in);
 		String userPhrase1 = input.nextLine().toUpperCase();
 		char[] userInputChar = userPhrase1.toCharArray();
-		String translatedStr = " ";
+		String translatedStr = "";
 
 		
 		do {
@@ -166,8 +157,7 @@ public class DecryptEncryptMorse {
 
 			}
 			System.out.println("\nHere is your code in Morse Code:\n" + translatedStr);
+			break;
 		} while (input.nextLine() != null);
-		
 	}
-
 }
